@@ -1,3 +1,6 @@
+## Detailed step by step explanation of this code in "README
+## It assumes you have "UCI HAR Dataset" FOLDER placed in the current wd
+
 #1
     initial.wd<-getwd()
 #2
