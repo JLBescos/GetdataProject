@@ -4,9 +4,22 @@ This document explains the process from the raw data to the tidy data correspond
 
 In order to run the code the only requirement is to place the “UCI HAR Dataset” folder within the current wd. Please, consider the “paths” may differ between Windows and OS platform. This work was done within a OS X Yosemite 10.10.2 environment.
 
+The input data are double-split: 3 different files (features, subjects, and activities) for two different groups of subjects (train and test). Additionally there are several files containing the meta-information (variable names and activity labels). So, the logic of the operations in the script is as follows: 
+
+  a) get the data from train and test groups, 
+  b) join the data of the 2 groups features with features, activities with activities, subjects with subjects, respectively 
+  c) get the meta-information, 
+  d) assign meta-info to the combined features file, 
+  e) select the variables to be considered based on meta-infomation (variable names)
+  f) complete meta-information assignment
+  g) combine selected features with subjects and activities
+  h) Group the resulting data frame per activity and subject + summarize features (mean)
+  i) Write the resulting data frame as a text file
+
 As the input information is detailed I have tried to minimized typing as much as I could; meaning I instructed R to read for me the file names, the variable names, etc, which I later re-introduce as arguments for handling the data as explained below.
 
-### The script explanation step by step (numbering corresponds to script)
+
+### The script explanation step by step (numbering corresponds to script). You can find this steps as comments in the “run_analysis.R” script. 
 
 1 Setting the initial wd where “UCI HAR Dataset” folder is placed
 2 Pointing R to the appropriate folder (train)
@@ -38,14 +51,17 @@ As the input information is detailed I have tried to minimized typing as much as
 
 ### Code Book
 
-The transformation described above were applied on the original X features files which contain several measures from the time and frequencies’ domains (properly identify with the firs variable name letter and, also, in the variable labels) associated with body linear acceleration, gravity, and gyroscope velocity n a normalized scale [-1,1].Being this data the outcome of averaging, the features variables scale is also normalized in the interval [-1,1]. 
-There are also the activity and subject variables to identify which subject was conducting which activity by the time the measures were made.
+The transformation described above were applied on the original X features files which contain several measures from the time and frequencies’ domains (properly identify with the firs variable name letter and, also, in the variable labels) associated with triaxial (x,y,z) body linear acceleration, gravity, and gyroscope velocity n a normalized scale [-1,1].
+
+Being these data the outcome of averaging features conditioning on subjects and activities, the resulting scale is also normalized in the interval [-1,1]. 
+
+There are also 2 extra variables: “activity” and “subject” to identify which subject was conducting which activity by the time the measures were made.
 
 Please, see the original Code Book for more information.
 
 
 
-##Variables
+##Variables in the “tidy.data.set.txt” file:
 
 
 variable.number 	variable.names	
